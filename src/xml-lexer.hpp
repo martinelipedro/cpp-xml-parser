@@ -20,6 +20,27 @@ struct Token
     Token(int TokenType, std::string value) : type(type), value(value) {}
 };
 
+class TokenList
+{
+private:
+    Token* current_tok;
+    unsigned int currentIndex;
+public:
+    std::vector<Token*> tokenList;
+
+    Token* at(unsigned int index);
+    Token* last();
+    Token* current();
+    Token* next();
+    Token* advance();
+
+    Token* operator[](unsigned int index) 
+    {
+        return at(index);
+    }
+
+};
+
 class XmlLexer
 {
 public:

@@ -48,3 +48,31 @@ void XmlLexer::collectID()
 
     tokenList.push_back(new Token(Token::TOK_ID, buffer));
 }
+
+
+
+Token* TokenList::at(unsigned int index)
+{
+    return tokenList[index];
+}
+
+Token* TokenList::last()
+{
+    return tokenList[currentIndex - 1];
+}
+
+Token* TokenList::current()
+{
+    return tokenList[currentIndex];
+}
+
+Token* TokenList::next()
+{
+    return tokenList[currentIndex + 1];
+}
+
+Token* TokenList::advance()
+{
+    currentIndex++;
+    return current();
+}
