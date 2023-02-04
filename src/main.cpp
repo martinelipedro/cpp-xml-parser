@@ -7,17 +7,13 @@
 
 int main()
 {
-    TagNode* a_tag = new TagNode("root");
-    TextNode* text_part = new TextNode("textTag", "hello");
+    XmlLexer lexer("<hello>Content</hello>");
+    lexer.collect();
 
-    a_tag->addChild(text_part);
-    
-    LOG(a_tag->getChildAs<TextNode>(0)->content);
-    
-
-
-
-
+    for (Token* tok : lexer.tokenList)
+    {
+        LOG(tok->value);
+    }
 
 
 }

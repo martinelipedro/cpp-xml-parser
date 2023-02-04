@@ -2,15 +2,12 @@
 #define XML_PARSER_HPP
 
 #include "xml-nodes.hpp"
+#include "xml-lexer.hpp"
 
-namespace xml_parser
-{
-    class XmlParser
-    {   
-    public:
-
-    };
-
+class XmlParser
+{   
+public:
 };
+
 
 #endif
