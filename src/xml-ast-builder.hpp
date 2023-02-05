@@ -25,6 +25,7 @@ public:
     TagNode* buildTag();
     TagHeader buildTagHeader();
     bool isEndTagOpening();
+    void eatEndOfTag();
 
     std::map<std::string, std::string> buildAttributes();
 };

@@ -21,28 +21,44 @@ TagNode* XmlAstBuilder::buildTag()
     TagHeader header = buildTagHeader();
     std::vector<Node*> children;
 
+    if (tokens.current()->type == Token::TOK_ID)
+    {
+        std::string buffer;
+
+        while (tokens.current()->type == Token::TOK_ID)
+        {
+            buffer.append(" " + tokens.eat(Token::TOK_ID)->value);
+        }
+
+        buffer.erase(0, 1);
+
+        children.push_back(new TextNode(buffer));
+
+        eatEndOfTag();
+
+        TagNode* tag = new TagNode(header.tagName);
+        tag->attributes = header.tagAttributes;
+        tag->children = children;
+
+        return tag;
+    }
+
 
     while (tokens.current()->type == Token::TOK_STARTTAG && !isEndTagOpening())
     {
         children.push_back(buildTag());
     }
 
-    if (tokens.current()->type == Token::TOK_ID)
-    {
-        children.push_back(new TextNode("a content"));
-    }
+    
 
-    tokens.eat(Token::TOK_STARTTAG);
-    tokens.eat(Token::TOK_SLASH, "slash eat");
-    /* TODO: checar com o nome do header da tag */
-    tokens.eat(Token::TOK_ID, "apos todo");
-    tokens.eat(Token::TOK_ENDTAG);
+    
 
 
     TagNode* tag = new TagNode(header.tagName);
     tag->attributes = header.tagAttributes;
-    tag->childs = children;
+    tag->children = children;
 
+    eatEndOfTag();
 
     return tag;
 }
@@ -51,9 +67,8 @@ TagHeader XmlAstBuilder::buildTagHeader()
 {
     TagHeader header;
 
-
     tokens.eat(Token::TOK_STARTTAG);
-    header.tagName = tokens.eat(Token::TOK_ID, "NO HEADER")->value;
+    header.tagName = tokens.eat(Token::TOK_ID)->value;
     header.tagAttributes = buildAttributes();
     tokens.eat(Token::TOK_ENDTAG);
 
@@ -66,6 +81,15 @@ bool XmlAstBuilder::isEndTagOpening()
         return true;
     
     return false;
+}
+
+void XmlAstBuilder::eatEndOfTag()
+{
+    tokens.eat(Token::TOK_STARTTAG);
+    tokens.eat(Token::TOK_SLASH);
+    /* TODO: checar com o nome do header da tag */
+    tokens.eat(Token::TOK_ID);
+    tokens.eat(Token::TOK_ENDTAG);
 }
 
 std::map<std::string, std::string> XmlAstBuilder::buildAttributes()

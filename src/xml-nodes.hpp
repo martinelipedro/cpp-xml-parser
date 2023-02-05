@@ -24,14 +24,14 @@ public:
 class TagNode : public Node
 {
 public:
-    std::vector<Node*> childs;
+    std::vector<Node*> children;
 
 
     TagNode(std::string name) : Node(TAG_NODE, name) {}
 
     void addChild(Node* child)
     {
-        childs.push_back(child);
+        children.push_back(child);
     }
 
 
@@ -41,12 +41,12 @@ public:
     template <typename T>
     T* getChildAs(unsigned int childPosition)
     {
-        return (T*)childs[childPosition];
+        return (T*)children[childPosition];
     }
 
     Node* getChild(unsigned int childPosition)
     {
-        return childs[childPosition];
+        return children[childPosition];
     }
 
 };
@@ -54,15 +54,7 @@ public:
 class TextNode : public Node
 {
 public:
-    std::string content;
-
-    TextNode(std::string name, std::string content) : Node(TEXT_NODE, name), content(content) {}
-    TextNode(std::string name) : Node(TEXT_NODE, name), content("") {}
-
-    void setContent(std::string content)
-    {
-        content = content;
-    }
+    TextNode(std::string name) : Node(TEXT_NODE, name) {}
 };
 
 

@@ -6,15 +6,11 @@
 
 int main()
 {
-    XmlLexer lexer("<hello attr=\"asd\"><test></test><test2></test2></hello>");
-    lexer.collect();
+    XmlParser xmlParser("<hello></hello>");
 
-    TokenList tokenList(lexer.tokenList);
-    XmlAstBuilder xmlBuilder(tokenList);
+    for (auto i : xmlParser.rootChildrenNames())
+    {
+        LOG(i)
+    }
 
-    xmlBuilder.build();
-
-    LOG(xmlBuilder.rootNode->attributes["attr"]);
-    LOG(xmlBuilder.rootNode->childs[0]->name);
-    LOG(xmlBuilder.rootNode->childs[1]->name);
 }
