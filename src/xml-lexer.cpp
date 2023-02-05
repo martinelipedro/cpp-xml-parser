@@ -1,5 +1,7 @@
 #include "xml-lexer.hpp"
 
+#include <iostream>
+
 void XmlLexer::advance()
 {
     if (currentChar)
@@ -75,4 +77,17 @@ Token* TokenList::advance()
 {
     currentIndex++;
     return current();
+}
+
+Token* TokenList::eat(Token::TokenType type, std::string where)
+{
+
+    if (current()->type != type)
+    {
+        std::cerr << "ERROR, Expected: " << type << '\n' << "At: " << where;
+        exit(1);
+    }
+    advance();
+    return last();
+
 }

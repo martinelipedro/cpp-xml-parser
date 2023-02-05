@@ -17,22 +17,24 @@ struct Token
     } type;
     std::string value;
 
-    Token(int TokenType, std::string value) : type(type), value(value) {}
+    Token(TokenType type, std::string value) : type(type), value(value) {}
 };
 
 class TokenList
 {
 private:
-    Token* current_tok;
     unsigned int currentIndex;
 public:
     std::vector<Token*> tokenList;
+
+    TokenList(std::vector<Token*> tokenList) : currentIndex(0), tokenList(tokenList) {}
 
     Token* at(unsigned int index);
     Token* last();
     Token* current();
     Token* next();
     Token* advance();
+    Token* eat(Token::TokenType type, std::string where = "");
 
     Token* operator[](unsigned int index) 
     {
