@@ -1,9 +1,0 @@
-<Familia>
-    <Pessoa funcao="mãe">
-        <Nome>Marcia</Nome>
-    </Pessoa>
-
-    <Pessoa funcao="Filho">
-        <Nome>Pedro</Nome>
-    </Pessoa> 
-</Familia>
