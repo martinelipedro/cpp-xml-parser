@@ -2,15 +2,9 @@
 
 #include <iostream>
 
-
-
 int main()
 {
-    XmlParser xmlParser("<hello></hello>");
+    XmlParser xmlParser("<hello><testtag><helloWorld>test</helloWorld><helloWorld2>test</helloWorld2></testtag></hello>");
 
-    for (auto i : xmlParser.rootChildrenNames())
-    {
-        LOG(i)
-    }
 
 }

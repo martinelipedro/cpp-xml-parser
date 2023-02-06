@@ -9,5 +9,5 @@ XmlParser::XmlParser(std::string source)
     xmlBuilder.build();
     
     rootNode = xmlBuilder.rootNode;
-    
 }
+

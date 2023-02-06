@@ -1,3 +1,3 @@
-/.vscode
+.vscode
 *.o
-./xml-reader
+xml-reader
